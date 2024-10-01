@@ -1,4 +1,14 @@
 /* 
+VARIABLES
+*/
+
+let firstNum;
+
+let secondNum;
+
+let operator;
+
+/* 
 FUNCTIONS
 */
 
@@ -17,10 +27,6 @@ function multiply(a,b){
 function divide(a,b){
     return a / b;
 }
-
-/* 
-VARIABLES
-*/
 
 /* 
 LISTENERS 
