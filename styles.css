@@ -9,7 +9,7 @@ body{
 }
 
 #container{
-    height: 200px;
+    height: 300px;
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -33,5 +33,12 @@ body{
     outline: none;
     direction: rtl;
     caret-color: transparent;
+}
+
+#buttons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-sizing: border-box;
 }
 
