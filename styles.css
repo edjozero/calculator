@@ -10,7 +10,7 @@ body{
 
 #container{
     height: 300px;
-    width: 190px;
+    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,4 +49,14 @@ body{
     color: white;
     font-size: 20px;
     flex: auto;
+    border: none;
+}
+
+.operators,
+.submitMath{
+    background-color: orange;
+}
+
+.numbers{
+    background-color: gray;
 }
