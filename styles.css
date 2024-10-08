@@ -10,12 +10,13 @@ body{
 
 #container{
     height: 300px;
-    width: 200px;
+    width: 190px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
+    padding: 5px;
     border: 2px solid black;
     background-color: rgb(46, 46, 46);
     box-sizing: border-box;
@@ -42,3 +43,10 @@ body{
     box-sizing: border-box;
 }
 
+.allButtons{
+    background-color: darkgray;
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
+    flex: auto;
+}
