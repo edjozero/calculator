@@ -8,6 +8,10 @@ let secondNum;
 
 let operator;
 
+const buttons = document.querySelectorAll("button");
+
+let display = document.querySelector("#daDisplay");
+
 /* 
 FUNCTIONS
 */
@@ -47,3 +51,9 @@ function operate(ope, num1, num2){
 /* 
 LISTENERS 
 */
+
+buttons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        display.textContent += e.target.textContent;
+    });
+});

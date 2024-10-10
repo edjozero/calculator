@@ -31,9 +31,7 @@ body{
     border: transparent;
     margin: 10px;
     color: white;
-    outline: none;
-    direction: rtl;
-    caret-color: transparent;
+    text-align: right;
 }
 
 #buttons{
