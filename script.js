@@ -33,6 +33,10 @@ function divide(a,b){
     return a / b;
 }
 
+function appendValue(value){
+    display.value += value;
+}
+
 
 // function that takes number variables and operator, then calls one of the math functions
 
@@ -54,6 +58,6 @@ LISTENERS
 
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
-        display.textContent += e.target.textContent;
+        appendValue(e.target.value);
     });
 });
