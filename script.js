@@ -16,7 +16,8 @@ let display = document.querySelector("#daDisplay");
 FUNCTIONS
 */
 
-// math function
+// math functions
+
 function add(a, b){
     return a + b;
 }
@@ -33,8 +34,22 @@ function divide(a,b){
     return a / b;
 }
 
+// calculator display functions
+
+// adding clicked buttons to the display
 function appendValue(value){
     display.value += value;
+}
+
+// clearing the display
+function clearDisplay(){
+    display.value = '';
+}
+
+// backspace/delete one value at a time
+function deleteBackspace(){
+    let currentValue = display.value;
+    display.value = currentValue.slice(0, -1);
 }
 
 
@@ -59,5 +74,13 @@ LISTENERS
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
         appendValue(e.target.value);
+
+        if(e.target.classList.contains("clear")){
+            clearDisplay();
+        }
+
+        if(e.target.classList.contains("delete")){
+            deleteBackspace();
+        }
     });
 });
