@@ -67,6 +67,23 @@ function operate(ope, num1, num2){
     }
 }
 
+// function to split what is entered into the display into the previously created variables 
+function splitValue(val){
+    let currValue = display.value;
+
+    const valueArr = currValue.split("");
+
+    // firstNum = valueArr[0];
+    // operator = valueArr[1];
+    // secondNum = valueArr[2];
+
+    // display.value = operate(operator, firstNum, secondNum);
+
+    display.value = valueArr;
+
+    console.log(display.value);
+}
+
 /* 
 LISTENERS 
 */
@@ -81,6 +98,10 @@ buttons.forEach(button => {
 
         if(e.target.classList.contains("delete")){
             deleteBackspace();
+        }
+
+        if (e.target.classList.contains("submitMath")) {
+            splitValue();
         }
     });
 });
