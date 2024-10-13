@@ -2,12 +2,6 @@
 VARIABLES
 */
 
-let firstNum;
-
-let secondNum;
-
-let operator;
-
 const buttons = document.querySelectorAll("button");
 
 let display = document.querySelector("#daDisplay");
@@ -23,7 +17,7 @@ function add(a, b){
 }
 
 function subtract(a,b){
-    return a - b
+    return a - b;
 }
 
 function multiply(a,b){
@@ -60,26 +54,41 @@ function operate(ope, num1, num2){
         return add(num1, num2);
     }else if(ope === "-"){
         return subtract(num1, num2);
-    }else if(ope === "*"){
+    }else if(ope === "x"){
         return multiply(num1, num2);
-    }else if(ope === "/"){
+    }else if(ope === "÷"){
         return divide(num1, num2);
     }
 }
 
 // function to split what is entered into the display into the previously created variables 
-function splitValue(val){
-    let currValue = display.value;
+function splitValue(){
+    let currValue = display.value; 
 
     const valueArr = currValue.split("");
 
-    // firstNum = valueArr[0];
-    // operator = valueArr[1];
-    // secondNum = valueArr[2];
+    let numOne = "";
+    let oper = "";
+    let numTwo = "";
 
-    // display.value = operate(operator, firstNum, secondNum);
+    for (let i = 0; i < valueArr.length; i++) {
+        if (valueArr[i] === "+" || 
+            valueArr[i] === "-" || 
+            valueArr[i] === "x" || 
+            valueArr[i] === "÷") {
 
-    display.value = valueArr;
+            numOne = parseFloat(valueArr.slice(0, i).join(""));
+
+            oper = valueArr[i];
+
+            numTwo = parseFloat(valueArr.slice(i + 1).join(""));
+
+            break; 
+
+        }
+    }
+
+    display.value = operate(oper, numOne, numTwo);
 
     console.log(display.value);
 }
