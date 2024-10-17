@@ -2,6 +2,10 @@
 VARIABLES
 */
 
+let numOne = "";
+let oper = "";
+let numTwo = "";
+
 const buttons = document.querySelectorAll("button");
 
 let display = document.querySelector("#daDisplay");
@@ -66,10 +70,6 @@ function splitValue(){
     let currValue = display.value; 
 
     const valueArr = currValue.split("");
-
-    let numOne = "";
-    let oper = "";
-    let numTwo = "";
 
     for (let i = 0; i < valueArr.length; i++) {
         if (valueArr[i] === "+" || 
