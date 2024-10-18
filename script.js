@@ -5,6 +5,7 @@ VARIABLES
 let numOne = "";
 let oper = "";
 let numTwo = "";
+let resultDisplayed = false;
 
 const buttons = document.querySelectorAll("button");
 
@@ -36,18 +37,25 @@ function divide(a,b){
 
 // adding clicked buttons to the display
 function appendValue(value){
+    if(resultDisplayed && !isNaN(value)){
+        display.value = "";
+        resultDisplayed = false;
+    }
     display.value += value;
 }
 
 // clearing the display
 function clearDisplay(){
-    display.value = '';
+    display.value = "";
+    numOne = "";
+    numTwo = "";
+    oper = "";
+    resultDisplayed = false;
 }
 
 // backspace/delete one value at a time
 function deleteBackspace(){
-    let currentValue = display.value;
-    display.value = currentValue.slice(0, -1);
+    display.value = display.value.slice(0, -1);
 }
 
 
@@ -77,7 +85,9 @@ function splitValue(){
             valueArr[i] === "x" || 
             valueArr[i] === "÷") {
 
-            numOne = parseFloat(valueArr.slice(0, i).join(""));
+            if(numOne === ""){
+                numOne = parseFloat(valueArr.slice(0, i).join(""));
+            }
 
             oper = valueArr[i];
 
@@ -88,9 +98,17 @@ function splitValue(){
         }
     }
 
-    display.value = operate(oper, numOne, numTwo);
+    if(numOne !== "" && numTwo !== ""){
+        let result = operate(oper, numOne, numTwo);
+        display.value = result;
+        numOne = result;
+        numTwo = "";
+        resultDisplayed = true;
+    }
 
-    console.log(display.value);
+    // display.value = operate(oper, numOne, numTwo);
+
+    // console.log(display.value);
 }
 
 /* 
@@ -99,18 +117,22 @@ LISTENERS
 
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
-        appendValue(e.target.value);
+        let buttonValue = e.target.value;
 
-        if(e.target.classList.contains("clear")){
+        if(e.target.classList.contains("submitMath")){
+            splitValue();
+        }
+
+        else if(e.target.classList.contains("clear")){
             clearDisplay();
         }
 
-        if(e.target.classList.contains("delete")){
+        else if(e.target.classList.contains("delete")){
             deleteBackspace();
         }
 
-        if (e.target.classList.contains("submitMath")) {
-            splitValue();
+        else{
+            appendValue(buttonValue);
         }
     });
 });
