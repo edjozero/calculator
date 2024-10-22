@@ -27,12 +27,17 @@ body{
 #expressionInput{
     height: 50px;
     width: 170px;
-    font-size: larger;
+    font-size: x-large;
     background-color: rgb(46, 46, 46);
     border: transparent;
     margin: 10px;
     color: white;
     text-align: right;
+}
+
+#expressionInput{
+    font-size: large;
+    color: darkgrey;
 }
 
 #buttons{
