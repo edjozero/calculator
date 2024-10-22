@@ -10,6 +10,7 @@ let resultDisplayed = false;
 const buttons = document.querySelectorAll("button");
 
 let display = document.querySelector("#daDisplay");
+let mathExpression = document.querySelector("#expressionInput");
 
 /* 
 FUNCTIONS
@@ -44,9 +45,15 @@ function appendValue(value){
     display.value += value;
 }
 
+// update expression input
+function updateExpression(value){
+    mathExpression.value += value;
+}
+
 // clearing the display
 function clearDisplay(){
     display.value = "";
+    mathExpression.value = "";
     numOne = "";
     numTwo = "";
     oper = "";
@@ -56,6 +63,7 @@ function clearDisplay(){
 // backspace/delete one value at a time
 function deleteBackspace(){
     display.value = display.value.slice(0, -1);
+    mathExpression.value = mathExpression.value.slice(0, -1);
 }
 
 
@@ -133,6 +141,7 @@ buttons.forEach(button => {
 
         else{
             appendValue(buttonValue);
+            updateExpression(buttonValue);
         }
     });
 });
