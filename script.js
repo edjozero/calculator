@@ -12,6 +12,7 @@ const buttons = document.querySelectorAll("button");
 let display = document.querySelector("#daDisplay");
 let mathExpression = document.querySelector("#expressionInput");
 
+
 /* 
 FUNCTIONS
 */
@@ -81,43 +82,44 @@ function operate(ope, num1, num2){
     }
 }
 
-// function to split what is entered into the display into the previously created variables 
-function splitValue(){
-    let currValue = display.value; 
+// function to split what is entered into the display into the previously created variables and allow chaining operations
 
-    const valueArr = currValue.split("");
+function chainingOperations(op){
+    if(numOne === ""){
+        // if numOne is still empty, take the current display as numOne
+        numOne = parseFloat(display.value); 
+    }else if(numTwo === "" && oper){
+        // if oper is filled (meaning true here) and numTwo is empty, take the current display value as numTwo
+        numTwo = parseFloat(display.value);
 
-    for (let i = 0; i < valueArr.length; i++) {
-        if (valueArr[i] === "+" || 
-            valueArr[i] === "-" || 
-            valueArr[i] === "x" || 
-            valueArr[i] === "÷") {
-
-            if(numOne === ""){
-                numOne = parseFloat(valueArr.slice(0, i).join(""));
-            }
-
-            oper = valueArr[i];
-
-            numTwo = parseFloat(valueArr.slice(i + 1).join(""));
-
-            break; 
-
-        }
-    }
-
-    if(numOne !== "" && numTwo !== ""){
+        // perform the math and show the result
         let result = operate(oper, numOne, numTwo);
         display.value = result;
-        numOne = result;
-        numTwo = "";
-        resultDisplayed = true;
+        numOne = result; // store the result in numOne for the next operation
+        numTwo = ""; // clear numTwo for next user input 
     }
 
-    // display.value = operate(oper, numOne, numTwo);
-
-    // console.log(display.value);
+    oper = op; // sets the new operator to chain operations
+    resultDisplayed = true; 
 }
+
+// function that will handle the final calculation via the equals sign
+function finalCalculation(){
+    if(numOne !== "" && oper && numTwo === ""){
+        // similar to the chainingOperations function above, the else if part
+        numTwo = parseFloat(display.value);
+        let result = operate(oper, numOne, numTwo);
+        display.value = result;
+
+        // difference here is that expression and oper variable are cleared out/emptied 
+        mathExpression.value = ""; // clears the expression display
+        numOne = result;
+        numTwo = "";
+        oper = "";
+        resultDisplayed = true;
+    }
+}
+
 
 /* 
 LISTENERS 
@@ -128,7 +130,7 @@ buttons.forEach(button => {
         let buttonValue = e.target.value;
 
         if(e.target.classList.contains("submitMath")){
-            splitValue();
+            finalCalculation();
         }
 
         else if(e.target.classList.contains("clear")){
@@ -137,6 +139,11 @@ buttons.forEach(button => {
 
         else if(e.target.classList.contains("delete")){
             deleteBackspace();
+        }
+
+        else if(e.target.classList.contains("operators")){
+            chainingOperations(buttonValue);
+            updateExpression(buttonValue);
         }
 
         else{
