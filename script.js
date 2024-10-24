@@ -20,19 +20,43 @@ FUNCTIONS
 // math functions
 
 function add(a, b){
-    return a + b;
+    let addition = a + b;
+
+    if(!Number.isInteger(addition)){
+        return parseFloat(addition.toFixed(2));
+    }
+
+    return addition;
 }
 
 function subtract(a,b){
-    return a - b;
+    let subtraction = a - b;
+
+    if(!Number.isInteger(subtraction)){
+        return parseFloat(subtraction.toFixed(2));
+    }
+
+    return subtraction;
 }
 
 function multiply(a,b){
-    return a * b;
+    let multi = a * b;
+
+    if(!Number.isInteger(multi)){
+        return parseFloat(multi.toFixed(2));
+    }
+
+    return multi;
 }
 
 function divide(a,b){
-    return a / b;
+    let division = a / b;
+
+    if(!Number.isInteger(division)){
+        return parseFloat(division.toFixed(2));
+    }
+
+    return division;
 }
 
 // calculator display functions
