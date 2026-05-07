@@ -129,17 +129,21 @@ function chainingOperations(op){
 
 // function that will handle the final calculation via the equals sign
 function finalCalculation(){
-    if(numOne !== "" && oper && numTwo === ""){
-        // similar to the chainingOperations function above, the else if part
+
+    if(numOne !== "" && oper){
+
         numTwo = parseFloat(display.value);
+
         let result = operate(oper, numOne, numTwo);
+
         display.value = result;
 
-        // difference here is that expression and oper variable are cleared out/emptied 
-        mathExpression.value = ""; // clears the expression display
+        mathExpression.value = `${numOne} ${oper} ${numTwo} =`;
+
         numOne = result;
         numTwo = "";
         oper = "";
+
         resultDisplayed = true;
     }
 }
@@ -166,8 +170,16 @@ buttons.forEach(button => {
         }
 
         else if(e.target.classList.contains("operators")){
+
+            // if result was just displayed, reset expression
+            if(resultDisplayed){
+                mathExpression.value = `${display.value} ${buttonValue}`;
+            }
+            else{
+                updateExpression(buttonValue);
+            }
+
             chainingOperations(buttonValue);
-            updateExpression(buttonValue);
         }
 
         else{
@@ -175,4 +187,66 @@ buttons.forEach(button => {
             updateExpression(buttonValue);
         }
     });
+});
+
+document.addEventListener("keydown", (e) => {
+
+    let key = e.key;
+
+    // numbers and decimal
+    if(!isNaN(key) || key === "."){
+        appendValue(key);
+        updateExpression(key);
+    }
+
+    // operators
+    else if(key === "+" || key === "-"){
+        if(resultDisplayed){
+            mathExpression.value = `${display.value} ${key}`;
+        }
+        else{
+            updateExpression(key);
+        }
+
+        chainingOperations(key);
+    }
+
+    // multiplication
+    else if(key === "*"){
+        if(resultDisplayed){
+            mathExpression.value = `${display.value} ${key}`;
+        }
+        else{
+            updateExpression(key);
+        }
+
+        chainingOperations(key);
+    }
+
+    // division
+    else if(key === "/"){
+        if(resultDisplayed){
+            mathExpression.value = `${display.value} ${key}`;
+        }
+        else{
+            updateExpression(key);
+        }
+
+        chainingOperations(key);
+    }
+
+    // equals / enter
+    else if(key === "Enter" || key === "="){
+        finalCalculation();
+    }
+
+    // backspace
+    else if(key === "Backspace"){
+        deleteBackspace();
+    }
+
+    // clear calculator
+    else if(key.toLowerCase() === "c"){
+        clearDisplay();
+    }
 });
